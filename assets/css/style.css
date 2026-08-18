@@ -790,7 +790,7 @@ button {
     position: relative;
     isolation: isolate;
     overflow: clip;
-    min-height: min(760px, 82svh);
+    min-height: min(760px, 100svh);
     display: flex;
     align-items: flex-end;
     padding: 9.5rem 0 6rem
