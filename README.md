@@ -1,7 +1,7 @@
 # Screenshot
-![screenshot_1](screenshot/screenshot_1.png)
-![screenshot_2](screenshot/screenshot_2.png)
-![screenshot_3](screenshot/screenshot_3.png)
+![screenshot_1](https://i.imgur.com/drs7ghO.png)
+![screenshot_2](https://i.imgur.com/X5WksbL.png)
+![screenshot_3](https://i.imgur.com/8EAKpGZ.png)
 
 # Rullzsy_ — Portfolio
 
