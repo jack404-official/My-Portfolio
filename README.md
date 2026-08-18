@@ -94,32 +94,6 @@ EMAIL_FROM=message_portfolio@resend.dev
 └── src/lucide-icons.js     # icon bundle entry point
 ```
 
-## Pages
-
-### Home
-
-Hero with typing role animation, a two-button CTA (Download CV / Contact Me), and a parallax background (bg1).
-
-### About
-
-Intro (bg2) with a short bio, followed by the story and languages sections, including the tech-stack grid with SVG icons.
-
-### Projects
-
-Three featured projects (BSOD repair walkthrough, key management system, RT/RW Net network design) with screenshot previews and a keyboard-navigable lightbox (bg2).
-
-### Contact
-
-Contact details, social links, and a working serverless form that sends messages straight to your inbox via Resend (bg1).
-
-## Customization
-
-- **Section backgrounds** — swap the files in `assets/img/background/` (Home & Contact use `bg1`, About & Projects use `bg2`).
-- **Projects** — edit the projects section in `index.html` (title, description, tags, screenshots in `assets/img/project/`).
-- **Email template** — redesign the HTML email inside `api/contact.js` (inline styles only, matching the dark theme).
-- **Favicon** — replace `assets/ico/fav.ico` (32×32).
-- **Brand copy** — site text, hero roles, and social links all live in `index.html` and `assets/js/main.js`.
-
 ## Contributing
 
 This is a personal portfolio, but suggestions and bug reports are welcome — feel free to open an issue or pull request.
