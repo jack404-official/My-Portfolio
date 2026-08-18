@@ -27,7 +27,8 @@ Output: `assets/css/style.css` + `assets/library/lucide/lucide.min.js`.
 ## Form kontak (Resend)
 
 Form mengirim POST ke `/api/contact` (Vercel serverless function), yang memvalidasi
-input lalu mengirim email ke **rullzsy99@gmail.com** via [Resend](https://resend.com).
+input lalu mengirim email ke alamat `CONTACT_TO_EMAIL` (default: email pemilik
+akun Resend) via [Resend](https://resend.com).
 
 Perlindungan spam di `/api/contact.js`:
 - **Honeypot** — field tersembunyi `website` yang hanya diisi bot.
@@ -39,9 +40,14 @@ Perlindungan spam di `/api/contact.js`:
 
 1. Daftar di [resend.com](https://resend.com) dan buat **API Key** (`https://resend.com/api-keys`).
 2. Set environment variable di Vercel: `RESEND_API_KEY=re_...`.
-3. Opsional: `EMAIL_FROM` untuk alamat pengirim (default `onboarding@resend.dev`,
-   hanya untuk tes — untuk produksi verifikasi domain di Resend dan pakai
-   `noreply@domainmu`).
+3. **Catatan sandbox**: tanpa domain terverifikasi, Resend hanya mengizinkan
+   kirim ke **email pemilik akun Resend** — itulah default `CONTACT_TO_EMAIL`.
+   Untuk menerima pesan di alamat lain (mis. `rullzsy99@gmail.com`):
+   - Verifikasi domain di https://resend.com/domains (tambah record DNS),
+   - lalu set `CONTACT_TO_EMAIL=rullzsy99@gmail.com` dan
+     `EMAIL_FROM=noreply@domainmu.com` di Vercel.
+4. Opsional: `EMAIL_FROM` untuk alamat pengirim (default `message_portfolio@resend.dev`,
+   hanya untuk tes — untuk produksi verifikasi domain dan pakai `noreply@domainmu`).
 
 ## Deploy ke Vercel
 

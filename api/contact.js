@@ -1,11 +1,17 @@
 // ─────────────────────────────────────────────────────────────────────────
 //  Contact form endpoint — Vercel serverless function
 //  Menerima submission form kontak, memvalidasi, dan mengirim email
-//  ke pemilik situs (rullzsy99@gmail.com) via Resend.
+//  ke alamat pemilik situs via Resend.
 //
 //  Env vars (set di Vercel → Project → Settings → Environment Variables):
-//    RESEND_API_KEY  (wajib)  — buat di https://resend.com/api-keys
-//    EMAIL_FROM      (opsional) — alamat pengirim; default "onboarding@resend.dev"
+//    RESEND_API_KEY    (wajib)  — buat di https://resend.com/api-keys
+//    CONTACT_TO_EMAIL  (opsional) — alamat penerima pesan; default email pemilik akun Resend
+//    EMAIL_FROM        (opsional) — alamat pengirim; default "message_portfolio@resend.dev"
+//
+//  Catatan sandbox Resend: tanpa domain terverifikasi, email hanya bisa dikirim
+//  ke email pemilik akun Resend. Untuk mengirim ke alamat lain (mis. alamat
+//  pribadi), verifikasi domain di https://resend.com/domains lalu set
+//  CONTACT_TO_EMAIL + EMAIL_FROM.
 //
 //  Perlindungan spam:
 //    1. Honeypot  — field tersembunyi "website" yang hanya diisi bot.
@@ -13,7 +19,7 @@
 //    3. Rate limit per-IP — maks 3 pesan / 10 menit per pengunjung.
 // ─────────────────────────────────────────────────────────────────────────
 
-const TO_EMAIL = 'rullzsy99@gmail.com';
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'jack404.official@gmail.com';
 const RESEND_URL = 'https://api.resend.com/emails';
 
 const LIMITS = {
