@@ -69,7 +69,7 @@ CONTACT_TO_EMAIL=youremail@gmail.com
 EMAIL_FROM=emailform@resend.dev
 ```
 
-> **Sandbox note:** without a verified domain, Resend only allows sending to the account owner's email — that is the default `CONTACT_TO_EMAIL`. To receive messages at a personal address (e.g. `rullzsy99@gmail.com`), verify a domain at [resend.com/domains](https://resend.com/domains), then set `CONTACT_TO_EMAIL` and `EMAIL_FROM=noreply@yourdomain.com`.
+> **Sandbox note:** without a verified domain, Resend only allows sending to the account owner's email — that is the default `CONTACT_TO_EMAIL`. To receive messages at a personal address (e.g. `jack404.official@gmail.com`), verify a domain at [resend.com/domains](https://resend.com/domains), then set `CONTACT_TO_EMAIL` and `EMAIL_FROM=noreply@yourdomain.com`.
 
 ## Project Structure
 
