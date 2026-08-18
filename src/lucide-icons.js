@@ -1,6 +1,3 @@
-// Lucide entry — only the icons actually used on the site get bundled.
-// The icons map must match the data-lucide names (PascalCase keys).
-// Build: npm run build:icons  →  assets/library/lucide/lucide.min.js
 import {
     createIcons,
     ArrowUpRight,

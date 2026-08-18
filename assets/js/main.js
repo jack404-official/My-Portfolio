@@ -1,17 +1,12 @@
-/* Rullzsy portfolio — main.js */
-
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ─── Typing animation ─── */
 const typingTarget = document.querySelector('.typing-prefix');
-const heroRoles    = ['Web Developer & Computer Technician.', 'Always learning about technology.', 'Especially hardware & software.'];
+const heroRoles = ['Web Developer & Computer Technician.', 'Always learning about technology.', 'Especially hardware & software.'];
 let roleIndex = 0, charIndex = 0, deleting = false;
 
 function typeHeroRole() {
     if (!typingTarget) return;
     const role = heroRoles[roleIndex];
     typingTarget.textContent = role.slice(0, charIndex);
-
     if (!deleting && charIndex < role.length) { charIndex++; setTimeout(typeHeroRole, 72); return; }
     if (!deleting) { setTimeout(() => { deleting = true; typeHeroRole(); }, 1700); return; }
     if (charIndex > 0) { charIndex--; setTimeout(typeHeroRole, 40); return; }
@@ -21,36 +16,26 @@ function typeHeroRole() {
 }
 typeHeroRole();
 
-/* ─── Hero intro timeline ─── */
 if (!prefersReducedMotion) {
     gsap.registerPlugin(ScrollTrigger);
-
     gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .from('#navbar',           { y: -30, opacity: 0, duration: .7 })
-        .from('.hero-eyebrow',     { y: 10, opacity: 0, duration: .5 }, '-=.45')
+        .from('#navbar', { y: -30, opacity: 0, duration: .7 })
+        .from('.hero-eyebrow', { y: 10, opacity: 0, duration: .5 }, '-=.45')
         .to('.line-reveal > span', { y: 0, duration: .95, stagger: .12 }, '-=.3')
-        .from('#heroCopy',         { y: 18, opacity: 0, duration: .65 }, '-=.45')
-        .from('#heroButtons',      { y: 18, opacity: 0, duration: .65 }, '-=.4');
-
-    /* Scroll progress bar */
+        .from('#heroCopy', { y: 18, opacity: 0, duration: .65 }, '-=.45')
+        .from('#heroButtons', { y: 18, opacity: 0, duration: .65 }, '-=.4');
     gsap.to('#scrollProgress', {
         scaleX: 1, ease: 'none',
         scrollTrigger: { start: 0, end: 'max', scrub: .3 }
     });
-
-    /* Parallax — hero background (bg1) */
     gsap.to('.hero-image', {
         yPercent: 8, scale: 1.04, ease: 'none',
         scrollTrigger: { trigger: '#home', start: 'top top', end: 'bottom top', scrub: true }
     });
-
-    /* Parallax — about intro background (bg2) */
     gsap.to('.about-intro-bg', {
         yPercent: 10, scale: 1.06, ease: 'none',
         scrollTrigger: { trigger: '#about', start: 'top top', end: 'bottom top', scrub: true }
     });
-
-    /* Parallax — section backgrounds (bg3 + bg4) */
     gsap.utils.toArray('.about-section').forEach((section) => {
         const bg = section.querySelector('.section-bg');
         if (!bg) return;
@@ -59,18 +44,13 @@ if (!prefersReducedMotion) {
             scrollTrigger: { trigger: section, start: 'top bottom', end: 'bottom top', scrub: true }
         });
     });
-
-    /* Parallax — projects background */
     gsap.to('.projects-bg', {
         yPercent: 8, scale: 1.12, ease: 'none',
         scrollTrigger: { trigger: '#projects', start: 'top bottom', end: 'bottom top', scrub: true }
     });
-
-    /* Section reveals (below the hero) */
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
-
             const items = Array.from(entry.target.querySelectorAll('.reveal'));
             if (!items.length) { revealObserver.unobserve(entry.target); return; }
             gsap.to(items, {
@@ -81,7 +61,6 @@ if (!prefersReducedMotion) {
                 ease: 'power3.out',
                 overwrite: true
             });
-
             revealObserver.unobserve(entry.target);
         });
     }, { threshold: .12 });
@@ -94,7 +73,6 @@ if (!prefersReducedMotion) {
     });
 }
 
-/* ─── Page switching (Home / About / Projects / Contact) — no reload ─── */
 const pageHome = document.getElementById('page-home');
 const pageAbout = document.getElementById('page-about');
 const pageProjects = document.getElementById('page-projects');
@@ -104,20 +82,14 @@ const allPages = [pageHome, pageAbout, pageProjects, pageContact];
 function showPage(name) {
     const show = name === 'about' ? pageAbout : name === 'projects' ? pageProjects : name === 'contact' ? pageContact : pageHome;
     const hide = allPages.find(p => p !== show && !p.classList.contains('hidden'));
-
     if (!hide) return;
-
     hide.classList.add('hidden');
     show.classList.remove('hidden');
-
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     updateActiveNav();
-
-    /* Smooth page transition: fade + slide in */
     if (!prefersReducedMotion) {
         gsap.fromTo(show, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .5, ease: 'power2.out' });
     }
-
     requestAnimationFrame(() => { if (window.ScrollTrigger) ScrollTrigger.refresh(); });
 }
 
@@ -129,7 +101,6 @@ document.querySelectorAll('[data-page]').forEach((link) => {
     });
 });
 
-/* ─── Scrollspy — highlight the active nav link ─── */
 const navMap = { home: 'nav-home', about: 'nav-about', story: 'nav-about', languages: 'nav-about', projects: 'nav-projects', contact: 'nav-contact' };
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -138,7 +109,6 @@ function updateActiveNav() {
     const projectsVisible = !pageProjects.classList.contains('hidden');
     const contactVisible = !pageContact.classList.contains('hidden');
     const probe = window.scrollY + window.innerHeight * 0.4;
-
     let current = contactVisible ? 'contact' : projectsVisible ? 'projects' : aboutVisible ? 'about' : 'home';
     if (aboutVisible) {
         for (const id of ['about', 'story', 'languages']) {
@@ -146,7 +116,6 @@ function updateActiveNav() {
             if (el && el.offsetTop <= probe) current = 'about';
         }
     }
-
     const activeId = navMap[current] || 'nav-home';
     navLinks.forEach(link => {
         const isActive = link.id === activeId;
@@ -164,7 +133,6 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 updateActiveNav();
 
-/* ─── Navbar hide/show ─── */
 let lastScroll = 0;
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -173,7 +141,6 @@ window.addEventListener('scroll', () => {
     lastScroll = cur;
 }, { passive: true });
 
-/* ─── Mobile menu ─── */
 const menuBtn = document.getElementById('menuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
 const menuLinks = mobileMenu.querySelectorAll('.menu-link');
@@ -208,7 +175,6 @@ menuBtn.addEventListener('click', () => {
 });
 
 menuLinks.forEach(link => link.addEventListener('click', () => closeMenu()));
-
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !mobileMenu.classList.contains('menu-closed')) closeMenu();
 });
@@ -217,11 +183,9 @@ window.addEventListener('resize', () => {
     if (window.innerWidth >= 768) closeMenu();
 });
 
-/* ─── Contact form (kirim ke serverless /api/contact) ─── */
 const contactForm = document.getElementById('contactForm');
 const formNote = document.getElementById('formNote');
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
 function validateContact(p) {
     if (!p.firstName || p.firstName.length < 2 || p.firstName.length > 100) return 'Please enter your first name (2–100 characters).';
     if (!p.lastName || p.lastName.length < 2 || p.lastName.length > 100) return 'Please enter your last name (2–100 characters).';
@@ -242,17 +206,13 @@ function showFormNote(message, isError) {
 if (contactForm) {
     const submitBtn = contactForm.querySelector('.form-submit');
     const btnLabel = submitBtn.querySelector('.btn-label');
-
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
-        // Honeypot — field tersembunyi yang hanya diisi bot: pura-pura sukses
         if (contactForm.querySelector('[name="website"]')?.value) {
             showFormNote('Message sent! Thanks for reaching out.');
             contactForm.reset();
             return;
         }
-
         const fd = new FormData(contactForm);
         const payload = {
             firstName: (fd.get('firstName') || '').trim(),
@@ -261,16 +221,13 @@ if (contactForm) {
             subject: (fd.get('subject') || '').trim(),
             message: (fd.get('message') || '').trim()
         };
-
         const clientError = validateContact(payload);
         if (clientError) {
             showFormNote(clientError, true);
             return;
         }
-
         submitBtn.disabled = true;
         btnLabel.textContent = 'Sending…';
-
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
@@ -278,7 +235,6 @@ if (contactForm) {
                 body: JSON.stringify(payload)
             });
             const data = await res.json().catch(() => ({}));
-
             if (res.ok) {
                 showFormNote(`Message sent! Thanks for reaching out, ${payload.firstName}.`);
                 contactForm.reset();
@@ -296,14 +252,12 @@ if (contactForm) {
     });
 }
 
-/* ─── Lightbox (project preview) ─── */
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxCounter = document.getElementById('lightboxCounter');
 const lightboxPrev = document.getElementById('lightboxPrev');
 const lightboxNext = document.getElementById('lightboxNext');
 const lightboxClose = document.getElementById('lightboxClose');
-
 let lightboxList = [];
 let lightboxIndex = 0;
 
@@ -329,9 +283,8 @@ function closeLightbox() {
 }
 
 document.querySelectorAll('.project-media').forEach((media) => {
-    const shots = media.querySelectorAll('.project-shot img');            const list = Array.from(shots).map(img => img.currentSrc || img.src || img.getAttribute('src'));
+    const shots = media.querySelectorAll('.project-shot img'); const list = Array.from(shots).map(img => img.currentSrc || img.src || img.getAttribute('src'));
     if (!list.length) return;
-
     shots.forEach((img, i) => {
         img.closest('.project-shot').addEventListener('click', () => {
             if (prefersReducedMotion) { openLightbox(list, i); return; }
@@ -363,18 +316,16 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') lightboxNext.click();
 });
 
-/* ─── Magnetic buttons ─── */
 document.querySelectorAll('.magnetic').forEach((btn) => {
     btn.addEventListener('mousemove', (e) => {
         const r = btn.getBoundingClientRect();
-        gsap.to(btn, { x: (e.clientX - r.left - r.width/2)*.12, y: (e.clientY - r.top - r.height/2)*.12, duration:.25, ease:'power2.out' });
+        gsap.to(btn, { x: (e.clientX - r.left - r.width / 2) * .12, y: (e.clientY - r.top - r.height / 2) * .12, duration: .25, ease: 'power2.out' });
     });
     btn.addEventListener('mouseleave', () => {
-        gsap.to(btn, { x:0, y:0, duration:.45, ease:'elastic.out(1,.45)' });
+        gsap.to(btn, { x: 0, y: 0, duration: .45, ease: 'elastic.out(1,.45)' });
     });
 });
 
-/* ─── Cursor glow ─── */
 const glow = document.getElementById('cursorGlow');
 if (glow && window.matchMedia('(pointer: fine)').matches) {
     const glowX = gsap.quickTo(glow, 'x', { duration: .6, ease: 'power3.out' });

@@ -1,64 +1,131 @@
 # Rullzsy_ — Portfolio
 
-Portfolio pribadi, **100% offline** (font, CSS, JS, ikon, gambar semua lokal), dengan **form kontak serverless** di Vercel.
+Personal portfolio website — a **fully offline static site** (fonts, CSS, JS, and icons all bundled locally, zero runtime CDN) with a dark minimal design, GSAP scroll animations, and a spam-protected serverless contact form powered by Resend.
 
-## Struktur
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![GSAP](https://img.shields.io/badge/GSAP-%2388CE02.svg?style=for-the-badge&logo=greensock&logoColor=white) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
 
-```
-assets
- ├── library/          # gsap, lucide (bundle 8 ikon), tailwindcss (sumber build)
- ├── fonts/            # TTF lokal (Geist, Geist Mono, Inter)
- ├── css/style.css     # hasil build Tailwind + custom CSS (minified)
- ├── js/main.js        # semua JavaScript
- ├── svg/              # ikon stack
- └── img/background|project/
-api/contact.js         # serverless function form kontak (Vercel)
-```
+## Features
 
-## Build (diperlukan setelah ubah HTML/CSS atau ikon)
+- **100% Offline** — self-hosted fonts, compiled CSS, local JS, and SVG icons; no CDN at runtime
+- **GSAP Animations** — hero intro timeline, parallax section backgrounds, staggered scroll reveals
+- **Scroll Progress Bar** — thin top progress indicator synced to page scroll
+- **Scrollspy Navigation** — active nav link highlights follow the visible section
+- **SPA-style Page Switching** — Home / About / Projects / Contact swap without reloading
+- **Morphing Mobile Menu** — hamburger-to-close toggle with staggered link entrance
+- **Project Lightbox** — keyboard-navigable image preview (arrows + Escape)
+- **Serverless Contact Form** — server-side validation, honeypot, and per-IP rate limiting
+- **Tree-shaken Icons** — only the 8 Lucide icons actually used are bundled (3.6 KB)
+- **Responsive** — dark, minimal layout that scales from mobile to desktop
+
+## Tech Stack
+
+- **Language:** HTML5, CSS3, Vanilla JavaScript
+- **Styling:** Tailwind CSS (build-time, purged to used utilities only)
+- **Animations:** GSAP + ScrollTrigger
+- **Icons:** Lucide (custom 8-icon bundle via esbuild)
+- **Fonts:** Geist, Geist Mono, Inter (self-hosted TTF)
+- **Backend:** Vercel serverless function (`api/`)
+- **Email:** Resend
+- **Deployment:** Vercel
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+
+- [npm](https://www.npmjs.com/)
+
+### Installation
 
 ```bash
+git clone https://github.com/jack404-official/portfolio.git
+cd portfolio
 npm install
-npm run build        # build CSS (tailwind) + bundle ikon (lucide)
 ```
 
-Output: `assets/css/style.css` + `assets/library/lucide/lucide.min.js`.
+### Development
 
-## Form kontak (Resend)
-
-Form mengirim POST ke `/api/contact` (Vercel serverless function), yang memvalidasi
-input lalu mengirim email ke alamat `CONTACT_TO_EMAIL` (default: email pemilik
-akun Resend) via [Resend](https://resend.com).
-
-Perlindungan spam di `/api/contact.js`:
-- **Honeypot** — field tersembunyi `website` yang hanya diisi bot.
-- **Validasi server-side** — field wajib, format email, batas panjang (2–100 nama, dst).
-- **Rate limit** — maks 3 pesan / 10 menit per IP.
-- Input di-escape (anti email/HTML injection).
-
-### Setup email
-
-1. Daftar di [resend.com](https://resend.com) dan buat **API Key** (`https://resend.com/api-keys`).
-2. Set environment variable di Vercel: `RESEND_API_KEY=re_...`.
-3. **Catatan sandbox**: tanpa domain terverifikasi, Resend hanya mengizinkan
-   kirim ke **email pemilik akun Resend** — itulah default `CONTACT_TO_EMAIL`.
-   Untuk menerima pesan di alamat lain (mis. `rullzsy99@gmail.com`):
-   - Verifikasi domain di https://resend.com/domains (tambah record DNS),
-   - lalu set `CONTACT_TO_EMAIL=rullzsy99@gmail.com` dan
-     `EMAIL_FROM=noreply@domainmu.com` di Vercel.
-4. Opsional: `EMAIL_FROM` untuk alamat pengirim (default `message_portfolio@resend.dev`,
-   hanya untuk tes — untuk produksi verifikasi domain dan pakai `noreply@domainmu`).
-
-## Deploy ke Vercel
-
-1. Push repo ke GitHub.
-2. Di [vercel.com/new](https://vercel.com/new), import repo tersebut.
-   Vercel otomatis mendeteksi static site + folder `api/` (tidak perlu konfigurasi).
-3. Set env var `RESEND_API_KEY` di **Project → Settings → Environment Variables**.
-4. Deploy. Form kontak langsung jalan di `/api/contact`.
-
-Uji lokal dengan [Vercel CLI](https://vercel.com/docs/cli):
+Serve the folder statically (VS Code Live Server, `python -m http.server`, etc.) or run the Vercel dev server to also test the API:
 
 ```bash
-npx vercel dev        # jalankan di http://localhost:3000 (termasuk /api/contact)
+npx vercel dev
 ```
+
+### Production Build
+
+```bash
+npm run build
+```
+
+Compiles Tailwind CSS into `assets/css/style.css` and bundles the Lucide icons into `assets/library/lucide/lucide.min.js`.
+
+### Environment Variables
+
+Copy `.env.example` to `.env` for local use, or set them in **Vercel → Project → Settings → Environment Variables**:
+
+```
+RESEND_API_KEY=re_...
+CONTACT_TO_EMAIL=jack404.official@gmail.com
+EMAIL_FROM=message_portfolio@resend.dev
+```
+
+> **Sandbox note:** without a verified domain, Resend only allows sending to the account owner's email — that is the default `CONTACT_TO_EMAIL`. To receive messages at a personal address (e.g. `rullzsy99@gmail.com`), verify a domain at [resend.com/domains](https://resend.com/domains), then set `CONTACT_TO_EMAIL` and `EMAIL_FROM=noreply@yourdomain.com`.
+
+## Project Structure
+
+```
+.
+├── index.html              # single-page markup
+├── api/
+│   └── contact.js          # serverless contact endpoint (Vercel)
+├── assets/
+│   ├── css/style.css       # compiled Tailwind + custom CSS (minified)
+│   ├── js/main.js          # all site JavaScript
+│   ├── library/
+│   │   ├── gsap/           # vendored GSAP + ScrollTrigger
+│   │   ├── lucide/         # bundled icon set (8 icons)
+│   │   └── tailwindcss/    # tailwind.config.js + input.css (build source)
+│   ├── fonts/              # self-hosted TTF fonts
+│   ├── svg/                # tech-stack icons
+│   ├── img/
+│   │   ├── background/     # section background images
+│   │   └── project/        # project screenshots
+│   └── ico/fav.ico         # favicon
+└── src/lucide-icons.js     # icon bundle entry point
+```
+
+## Pages
+
+### Home
+
+Hero with typing role animation, a two-button CTA (Download CV / Contact Me), and a parallax background (bg1).
+
+### About
+
+Intro (bg2) with a short bio, followed by the story and languages sections, including the tech-stack grid with SVG icons.
+
+### Projects
+
+Three featured projects (BSOD repair walkthrough, key management system, RT/RW Net network design) with screenshot previews and a keyboard-navigable lightbox (bg2).
+
+### Contact
+
+Contact details, social links, and a working serverless form that sends messages straight to your inbox via Resend (bg1).
+
+## Customization
+
+- **Section backgrounds** — swap the files in `assets/img/background/` (Home & Contact use `bg1`, About & Projects use `bg2`).
+- **Projects** — edit the projects section in `index.html` (title, description, tags, screenshots in `assets/img/project/`).
+- **Email template** — redesign the HTML email inside `api/contact.js` (inline styles only, matching the dark theme).
+- **Favicon** — replace `assets/ico/fav.ico` (32×32).
+- **Brand copy** — site text, hero roles, and social links all live in `index.html` and `assets/js/main.js`.
+
+## Contributing
+
+This is a personal portfolio, but suggestions and bug reports are welcome — feel free to open an issue or pull request.
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+Copyright (C) 2026 Jack404 Official

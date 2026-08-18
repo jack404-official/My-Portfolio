@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 
-/* ─── Local fonts ──────────────────────────────────────────────────────── */
-
 @font-face {
     font-family: 'Geist';
     src: url('../fonts/Geist-Regular.ttf') format('truetype');
@@ -83,7 +81,6 @@
     font-display: swap;
 }
 
-/* ─── Design tokens ─────────────────────────────────────────────────────── */
 :root {
     color-scheme: dark;
     --bg: #000;
@@ -112,7 +109,6 @@ body {
 a, button { -webkit-tap-highlight-color: transparent; }
 :focus-visible { outline: 2px solid rgba(255,255,255,.75); outline-offset: 4px; }
 
-/* ─── Utility ──────────────────────────────────────────────────────────── */
 .site-border  { border-color: var(--border); }
 .site-muted   { color: var(--muted); }
 .mono { font-family: 'Geist Mono', monospace; }
@@ -131,7 +127,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     -webkit-mask-image: linear-gradient(to bottom, black, transparent 88%);
 }
 
-/* ─── Navbar ───────────────────────────────────────────────────────────── */
 #navbar { transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
 
 .nav-link {
@@ -157,7 +152,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
 .nav-link:hover, .nav-link.active, .nav-link[aria-current="page"] { color: var(--fg); }
 
-/* Menu toggle — morphing bars, not a hamburger. Hidden on desktop. */
 #menuBtn {
     display: none;
     flex-direction: column;
@@ -185,7 +179,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 #menuBtn.open .menu-bar:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
 #menuBtn.open .menu-bar:nth-child(2) { transform: translateY(-4.5px) rotate(-45deg); }
 
-/* Mobile menu overlay */
 #mobileMenu {
     visibility: hidden;
     opacity: 0;
@@ -208,7 +201,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 }
 .menu-link:hover, .menu-link.active { color: #fff; transform: translateX(6px); }
 
-/* ─── Hero ─────────────────────────────────────────────────────────────── */
 .hero-section {
     position: relative;
     display: flex;
@@ -295,7 +287,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     46%, 100% { opacity: 0; }
 }
 
-/* Underscore that blinks like a live typing cursor on the title */
 .title-cursor {
     color: rgba(255,255,255,.9);
     animation: typing-blink .8s steps(1,end) infinite;
@@ -337,7 +328,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .hero-button i { flex-shrink: 0; }
 .magnetic { will-change: transform; }
 
-/* ─── Eyebrow (dot + label) ───────────────────────────────────────────── */
 .eyebrow {
     display: inline-flex;
     align-items: center;
@@ -358,7 +348,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     flex-shrink: 0;
 }
 
-/* ─── About intro (bg2) ────────────────────────────────────────────────── */
 .about-intro {
     position: relative;
     isolation: isolate;
@@ -419,7 +408,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     letter-spacing: -.025em;
 }
 
-/* ─── Story & Languages sections (bg3 / bg4) ──────────────────────────── */
 .about-section {
     position: relative;
     isolation: isolate;
@@ -493,7 +481,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     line-height: 1.75;
 }
 
-/* Tech stack */
 .stack-heading {
     margin-top: clamp(2.5rem, 5vw, 3.5rem);
     color: var(--muted);
@@ -535,7 +522,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     white-space: nowrap;
 }
 
-/* ─── Contact ──────────────────────────────────────────────────────────── */
 .contact-section {
     position: relative;
     isolation: isolate;
@@ -685,7 +671,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .form-note.show { opacity: 1; }
 .form-note.error { color: #f87171; }
 
-/* Honeypot anti-bot — tersembunyi dari manusia, terlihat oleh bot */
 .hp-field {
     position: absolute;
     left: -9999px;
@@ -702,7 +687,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     .contact-grid { grid-template-columns: 1fr 1.05fr; }
 }
 
-/* ─── Projects ─────────────────────────────────────────────────────────── */
 .projects-section {
     position: relative;
     isolation: isolate;
@@ -832,7 +816,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
 
 .project-shot:hover .project-preview { opacity: 1; }
 
-/* ─── Lightbox ─────────────────────────────────────────────────────────── */
 .lightbox {
     position: fixed;
     inset: 0;
@@ -960,7 +943,6 @@ a, button { -webkit-tap-highlight-color: transparent; }
     .project-card { grid-template-columns: 1.05fr 1fr; }
 }
 
-/* ─── Footer ───────────────────────────────────────────────────────────── */
 footer { border-top: 1px solid var(--border); }
 
 .social-btn {
@@ -991,7 +973,6 @@ footer { border-top: 1px solid var(--border); }
 .social-facebook { --brand: #1877F2; }
 .social-mail     { --brand: #fff; }
 
-/* ─── Cursor glow ──────────────────────────────────────────────────────── */
 #cursorGlow {
     position: fixed;
     top: 0;
@@ -1006,13 +987,11 @@ footer { border-top: 1px solid var(--border); }
     opacity: 0;
 }
 
-/* ─── Reveal ───────────────────────────────────────────────────────────── */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
 }
 
-/* ─── Responsive ───────────────────────────────────────────────────────── */
 @media (min-width: 768px) {
     .hero-section { padding: 7rem 2.5rem 6rem; }
     .hero-content { max-width: 800px; }
@@ -1064,5 +1043,4 @@ footer { border-top: 1px solid var(--border); }
     .line-reveal > span { transform: none; }
 }
 
-/* ─── Tailwind utilities (terakhir, supaya menang atas CSS custom) ─────── */
 @tailwind utilities;
