@@ -1,7 +1,7 @@
 # Screenshot
-![screenshot_1]('screenshot (delete optional)\screenshot_1.png')
-![screenshot_2]('screenshot (delete optional)\screenshot_2.png')
-![screenshot_3]('screenshot (delete optional)\screenshot_3.png')
+![screenshot_1](screenshot\screenshot_1.png)
+![screenshot_2](screenshot\screenshot_2.png)
+![screenshot_3](screenshot\screenshot_3.png)
 
 # Rullzsy_ — Portfolio
 
