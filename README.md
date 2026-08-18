@@ -1,3 +1,6 @@
+# Screenshot
+![screenshot](screenshot.png)
+
 # Rullzsy_ — Portfolio
 
 Personal portfolio website — a **fully offline static site** (fonts, CSS, JS, and icons all bundled locally, zero runtime CDN) with a dark minimal design, GSAP scroll animations, and a spam-protected serverless contact form powered by Resend.
