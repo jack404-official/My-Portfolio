@@ -1,5 +1,5 @@
 
-const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'rullzsy99@gmail.com';
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'jack404.official@gmail.com';
 const RESEND_URL = 'https://api.resend.com/emails';
 
 const LIMITS = {
