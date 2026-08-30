@@ -1,4 +1,4 @@
-# Screenshot
+# Preview
 ![screenshot_1](https://i.imgur.com/drs7ghO.png)
 ![screenshot_2](https://i.imgur.com/X5WksbL.png)
 ![screenshot_3](https://i.imgur.com/8EAKpGZ.png)
@@ -43,7 +43,7 @@ Personal portfolio website — a **fully offline static site** (fonts, CSS, JS, 
 ### Installation
 
 ```bash
-git clone https://github.com/jack404-official/portfolio.git
+git clone https://github.com/jack404-official/My-Portfolio.git
 cd portfolio
 npm install
 ```
