@@ -103,10 +103,6 @@ EMAIL_FROM=emailform@resend.dev
 └── src/lucide-icons.js     # icon bundle entry point
 ```
 
-## Contributing
-
-This is a personal portfolio, but suggestions and bug reports are welcome — feel free to open an issue or pull request.
-
 ## License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
