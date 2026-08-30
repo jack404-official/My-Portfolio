@@ -1,13 +1,17 @@
-# Preview
-![screenshot_1](https://i.imgur.com/drs7ghO.png)
-![screenshot_2](https://i.imgur.com/X5WksbL.png)
-![screenshot_3](https://i.imgur.com/8EAKpGZ.png)
-
 # Rullzsy_ — Portfolio
 
 Personal portfolio website — a **fully offline static site** (fonts, CSS, JS, and icons all bundled locally, zero runtime CDN) with a dark minimal design, GSAP scroll animations, and a spam-protected serverless contact form powered by Resend.
 
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![GSAP](https://img.shields.io/badge/GSAP-%2388CE02.svg?style=for-the-badge&logo=greensock&logoColor=white) ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+
+---
+
+# Preview
+![screenshot_1](https://i.imgur.com/drs7ghO.png)
+![screenshot_2](https://i.imgur.com/X5WksbL.png)
+![screenshot_3](https://i.imgur.com/8EAKpGZ.png)
+
+---
 
 ## Features
 
